@@ -18,5 +18,10 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
+    rules: {
+      // This codebase fetches data with plain useEffect + setState (no
+      // React Query/SWR), which this new rule flags unconditionally.
+      'react-hooks/set-state-in-effect': 'off',
+    },
   },
 ])

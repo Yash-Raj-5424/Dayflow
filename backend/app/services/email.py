@@ -36,15 +36,13 @@ def _send(to_email: str, subject: str, text_body: str, html_body: str) -> None:
 
 
 def send_verification_email(to_email: str, token: str) -> None:
-    docs_link = settings.FRONTEND_URL
+    verify_link = f"{settings.FRONTEND_URL}/verify-email?token={token}"
     subject = "Verify your Dayflow account"
 
     text_body = (
         "Welcome to Dayflow!\n\n"
-        f"Open the API docs and use POST /auth/verify-email with this token:\n\n"
-        f"{token}\n\n"
-        f"Docs: {docs_link}\n\n"
-        f"This token expires in {settings.EMAIL_VERIFICATION_TOKEN_EXPIRE_MINUTES} minutes."
+        f"Verify your email by visiting:\n{verify_link}\n\n"
+        f"This link expires in {settings.EMAIL_VERIFICATION_TOKEN_EXPIRE_MINUTES} minutes."
     )
 
     html_body = f"""
@@ -52,18 +50,15 @@ def send_verification_email(to_email: str, token: str) -> None:
       <h2>Welcome to Dayflow</h2>
       <p>Please verify your email address to activate your account.</p>
       <p>
-        <a href="{docs_link}"
+        <a href="{verify_link}"
            style="display:inline-block;padding:10px 20px;background:#4f46e5;
                   color:#fff;text-decoration:none;border-radius:6px;">
-          Open API Docs
+          Verify Email
         </a>
       </p>
-      <p>In the docs, open <code>POST /auth/verify-email</code> and paste this token into the request body:</p>
-      <p style="background:#f3f4f6;padding:10px;border-radius:6px;word-break:break-all;">
-        <code>{token}</code>
-      </p>
+      <p>Or copy this link into your browser:<br><code>{verify_link}</code></p>
       <p style="color:#666;font-size:12px;">
-        This token expires in {settings.EMAIL_VERIFICATION_TOKEN_EXPIRE_MINUTES} minutes.
+        This link expires in {settings.EMAIL_VERIFICATION_TOKEN_EXPIRE_MINUTES} minutes.
       </p>
     </div>
     """
