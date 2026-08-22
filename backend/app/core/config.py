@@ -6,6 +6,14 @@ class Settings(BaseSettings):
     API_V1_PREFIX: str = "/api/v1"
     CORS_ORIGINS: list[str] = ["http://localhost:5173", "http://localhost:3000"]
 
+    DATABASE_URL: str = "postgresql+psycopg2://apple@localhost:5432/dayflow"
+
+    JWT_SECRET_KEY: str = "change-me-in-production"
+    JWT_ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24
+
+    EMAIL_VERIFICATION_TOKEN_EXPIRE_MINUTES: int = 60 * 24
+
     class Config:
         env_file = ".env"
 
