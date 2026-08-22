@@ -1,37 +1,49 @@
-type Tone = "violet" | "emerald" | "amber" | "rose" | "cyan" | "neutral";
+type Tone = "accent" | "success" | "warning" | "danger" | "neutral";
 
 const toneClasses: Record<Tone, string> = {
-  violet: "bg-violet-500/15 text-violet-300 border-violet-400/30",
-  emerald: "bg-emerald-500/15 text-emerald-300 border-emerald-400/30",
-  amber: "bg-amber-500/15 text-amber-300 border-amber-400/30",
-  rose: "bg-rose-500/15 text-rose-300 border-rose-400/30",
-  cyan: "bg-cyan-500/15 text-cyan-300 border-cyan-400/30",
-  neutral: "bg-white/[0.06] text-muted border-white/10",
+  accent: "bg-accent-subtle text-accent-hover border-accent-border",
+  success: "bg-success-subtle text-success border-success-border",
+  warning: "bg-warning-subtle text-warning border-warning-border",
+  danger: "bg-danger-subtle text-danger border-danger-border",
+  neutral: "bg-neutral-subtle text-muted border-neutral-border",
 };
 
 export function Badge({ tone = "neutral", children }: { tone?: Tone; children: React.ReactNode }) {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium capitalize ${toneClasses[tone]}`}
+      className={`inline-flex items-center gap-1.5 rounded-sm border px-2 py-0.5 text-xs font-medium capitalize ${toneClasses[tone]}`}
     >
       {children}
     </span>
   );
 }
 
-const statusTone: Record<string, Tone> = {
-  present: "emerald",
-  approved: "emerald",
-  half_day: "amber",
-  pending: "amber",
-  absent: "rose",
-  rejected: "rose",
-  leave: "violet",
-  paid: "violet",
-  sick: "cyan",
+export type EmployeeStatus = "active" | "inactive" | "on_leave";
+
+const employeeStatusConfig: Record<EmployeeStatus, { label: string; tone: Tone }> = {
+  active: { label: "Active", tone: "success" },
+  inactive: { label: "Inactive", tone: "neutral" },
+  on_leave: { label: "On Leave", tone: "warning" },
+};
+
+export function EmployeeStatusBadge({ status }: { status: EmployeeStatus }) {
+  const config = employeeStatusConfig[status];
+  return <Badge tone={config.tone}>{config.label}</Badge>;
+}
+
+const genericStatusTone: Record<string, Tone> = {
+  present: "success",
+  approved: "success",
+  half_day: "warning",
+  pending: "warning",
+  absent: "danger",
+  rejected: "danger",
+  leave: "accent",
+  paid: "accent",
+  sick: "neutral",
   unpaid: "neutral",
 };
 
 export function StatusBadge({ status }: { status: string }) {
-  return <Badge tone={statusTone[status] ?? "neutral"}>{status.replace("_", " ")}</Badge>;
+  return <Badge tone={genericStatusTone[status] ?? "neutral"}>{status.replace("_", " ")}</Badge>;
 }

@@ -61,8 +61,8 @@ export default function Profile() {
       <h1 className="mb-6 font-display text-3xl font-semibold text-ink">Profile</h1>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <Card className="flex flex-col items-center text-center lg:col-span-1">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-cyan-400 font-display text-2xl font-semibold text-white">
+        <Card className="p-5 flex flex-col items-center text-center lg:col-span-1">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-sky-400 font-display text-2xl font-semibold text-white">
             {initials(profile.first_name, profile.last_name) || profile.user.employee_id.slice(0, 2)}
           </div>
           <h2 className="mt-4 font-display text-lg font-semibold text-ink">{fullName}</h2>
@@ -98,7 +98,7 @@ export default function Profile() {
           </div>
         </Card>
 
-        <Card delay={0.05} className="lg:col-span-2">
+        <Card className="p-5 lg:col-span-2">
           <h3 className="mb-1 font-display text-lg font-semibold text-ink">Contact details</h3>
           <p className="mb-5 text-sm text-faint">You can update your phone and address. Other details are managed by HR.</p>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

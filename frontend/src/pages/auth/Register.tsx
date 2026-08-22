@@ -42,8 +42,8 @@ export default function Register() {
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center py-4 text-center"
         >
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-violet-500/20 to-cyan-400/20">
-            <MailCheck className="h-7 w-7 text-violet-300" />
+          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-500/15 to-sky-400/15">
+            <MailCheck className="h-7 w-7 text-blue-600" />
           </div>
           <p className="text-sm text-muted">
             We've sent a verification link to
@@ -109,7 +109,7 @@ export default function Register() {
       </form>
       <p className="mt-6 text-center text-sm text-muted">
         Already have an account?{" "}
-        <Link to="/login" className="font-medium text-violet-300 hover:text-violet-200">
+        <Link to="/login" className="font-medium text-blue-600 hover:text-blue-700">
           Sign in
         </Link>
       </p>

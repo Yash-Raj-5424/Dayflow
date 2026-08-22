@@ -1,39 +1,57 @@
 import { forwardRef } from "react";
 import type { InputHTMLAttributes, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
+import { ChevronDown } from "lucide-react";
 
 interface FieldWrapperProps {
   label?: string;
   error?: string;
   hint?: string;
   icon?: React.ReactNode;
+  required?: boolean;
 }
+
+const fieldBase =
+  "w-full rounded-md border bg-surface px-3 h-9 text-sm text-ink placeholder:text-faint outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/15";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>, FieldWrapperProps {}
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, hint, icon, className = "", id, ...props }, ref) => {
+  ({ label, error, hint, icon, required, className = "", id, ...props }, ref) => {
     const inputId = id ?? props.name;
     return (
-      <label className="block" htmlFor={inputId}>
-        {label && <span className="mb-1.5 block text-sm font-medium text-muted">{label}</span>}
+      <div>
+        {label && (
+          <label className="mb-1.5 block text-[13px] font-medium text-ink" htmlFor={inputId}>
+            {label}
+            {required && <span className="text-danger"> *</span>}
+          </label>
+        )}
         <div className="relative">
           {icon && (
-            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-faint">
-              {icon}
-            </span>
+            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-faint">{icon}</span>
           )}
           <input
             ref={ref}
             id={inputId}
-            className={`w-full rounded-xl border bg-white/[0.03] px-4 py-2.5 text-sm text-ink placeholder:text-faint outline-none transition-colors focus:border-violet-400/60 focus:bg-white/[0.05] ${
-              icon ? "pl-10" : ""
-            } ${error ? "border-rose-400/60" : "border-border"} ${className}`}
+            aria-invalid={!!error}
+            aria-describedby={error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined}
+            className={`${fieldBase} ${icon ? "pl-9" : ""} ${
+              error ? "border-danger focus:border-danger focus:ring-danger/15" : "border-border"
+            } ${className}`}
             {...props}
           />
         </div>
-        {error && <span className="mt-1.5 block text-xs text-rose-400">{error}</span>}
-        {hint && !error && <span className="mt-1.5 block text-xs text-faint">{hint}</span>}
-      </label>
+        {error && (
+          <p id={`${inputId}-error`} role="alert" className="mt-1.5 text-xs text-danger">
+            {error}
+          </p>
+        )}
+        {hint && !error && (
+          <p id={`${inputId}-hint`} className="mt-1.5 text-xs text-faint">
+            {hint}
+          </p>
+        )}
+      </div>
     );
   },
 );
@@ -42,24 +60,37 @@ Input.displayName = "Input";
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>, FieldWrapperProps {}
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ label, error, hint, className = "", id, children, ...props }, ref) => {
+  ({ label, error, hint, required, className = "", id, children, ...props }, ref) => {
     const selectId = id ?? props.name;
     return (
-      <label className="block" htmlFor={selectId}>
-        {label && <span className="mb-1.5 block text-sm font-medium text-muted">{label}</span>}
-        <select
-          ref={ref}
-          id={selectId}
-          className={`w-full appearance-none rounded-xl border bg-white/[0.03] px-4 py-2.5 text-sm text-ink outline-none transition-colors focus:border-violet-400/60 focus:bg-white/[0.05] ${
-            error ? "border-rose-400/60" : "border-border"
-          } ${className}`}
-          {...props}
-        >
-          {children}
-        </select>
-        {error && <span className="mt-1.5 block text-xs text-rose-400">{error}</span>}
-        {hint && !error && <span className="mt-1.5 block text-xs text-faint">{hint}</span>}
-      </label>
+      <div>
+        {label && (
+          <label className="mb-1.5 block text-[13px] font-medium text-ink" htmlFor={selectId}>
+            {label}
+            {required && <span className="text-danger"> *</span>}
+          </label>
+        )}
+        <div className="relative">
+          <select
+            ref={ref}
+            id={selectId}
+            aria-invalid={!!error}
+            className={`${fieldBase} appearance-none pr-9 ${
+              error ? "border-danger focus:border-danger focus:ring-danger/15" : "border-border"
+            } ${className}`}
+            {...props}
+          >
+            {children}
+          </select>
+          <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-faint" />
+        </div>
+        {error && (
+          <p role="alert" className="mt-1.5 text-xs text-danger">
+            {error}
+          </p>
+        )}
+        {hint && !error && <p className="mt-1.5 text-xs text-faint">{hint}</p>}
+      </div>
     );
   },
 );
@@ -68,22 +99,32 @@ Select.displayName = "Select";
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement>, FieldWrapperProps {}
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ label, error, hint, className = "", id, ...props }, ref) => {
+  ({ label, error, hint, required, className = "", id, ...props }, ref) => {
     const textareaId = id ?? props.name;
     return (
-      <label className="block" htmlFor={textareaId}>
-        {label && <span className="mb-1.5 block text-sm font-medium text-muted">{label}</span>}
+      <div>
+        {label && (
+          <label className="mb-1.5 block text-[13px] font-medium text-ink" htmlFor={textareaId}>
+            {label}
+            {required && <span className="text-danger"> *</span>}
+          </label>
+        )}
         <textarea
           ref={ref}
           id={textareaId}
-          className={`w-full rounded-xl border bg-white/[0.03] px-4 py-2.5 text-sm text-ink placeholder:text-faint outline-none transition-colors focus:border-violet-400/60 focus:bg-white/[0.05] ${
-            error ? "border-rose-400/60" : "border-border"
+          aria-invalid={!!error}
+          className={`${fieldBase} h-auto min-h-[80px] py-2 ${
+            error ? "border-danger focus:border-danger focus:ring-danger/15" : "border-border"
           } ${className}`}
           {...props}
         />
-        {error && <span className="mt-1.5 block text-xs text-rose-400">{error}</span>}
-        {hint && !error && <span className="mt-1.5 block text-xs text-faint">{hint}</span>}
-      </label>
+        {error && (
+          <p role="alert" className="mt-1.5 text-xs text-danger">
+            {error}
+          </p>
+        )}
+        {hint && !error && <p className="mt-1.5 text-xs text-faint">{hint}</p>}
+      </div>
     );
   },
 );

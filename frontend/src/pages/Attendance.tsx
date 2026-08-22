@@ -114,7 +114,7 @@ export default function Attendance() {
               </thead>
               <tbody>
                 {records.map((r) => (
-                  <tr key={r.id} className="border-b border-border/60 last:border-0 hover:bg-white/[0.02]">
+                  <tr key={r.id} className="border-b border-border/60 last:border-0 hover:bg-slate-900/[0.02]">
                     <td className="px-5 py-3.5 text-ink">{formatDate(r.date)}</td>
                     <td className="px-5 py-3.5 text-muted">{formatTime(r.check_in)}</td>
                     <td className="px-5 py-3.5 text-muted">{formatTime(r.check_out)}</td>

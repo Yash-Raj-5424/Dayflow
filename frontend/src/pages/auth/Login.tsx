@@ -66,7 +66,7 @@ export default function Login() {
       </form>
       <p className="mt-6 text-center text-sm text-muted">
         New to Dayflow?{" "}
-        <Link to="/register" className="font-medium text-violet-300 hover:text-violet-200">
+        <Link to="/register" className="font-medium text-blue-600 hover:text-blue-700">
           Create an account
         </Link>
       </p>

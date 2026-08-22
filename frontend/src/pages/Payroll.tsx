@@ -43,7 +43,7 @@ export default function Payroll() {
     return (
       <div>
         <h1 className="mb-6 font-display text-3xl font-semibold text-ink">Payroll</h1>
-        <Card>
+        <Card className="p-5">
           <EmptyState
             icon={<Wallet className="h-5 w-5" />}
             title="Payroll not set up yet"
@@ -65,9 +65,9 @@ export default function Payroll() {
       <h1 className="mb-6 font-display text-3xl font-semibold text-ink">Payroll</h1>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
+        <Card className="p-5 lg:col-span-2">
           <p className="text-sm text-faint">Net monthly salary</p>
-          <p className="mt-1 font-display text-4xl font-semibold text-gradient">{formatCurrency(payroll.net_salary)}</p>
+          <p className="mt-1 font-display text-4xl font-semibold text-ink">{formatCurrency(payroll.net_salary)}</p>
           <p className="mt-1 flex items-center gap-1.5 text-xs text-faint">
             <CalendarDays className="h-3.5 w-3.5" /> Effective from {formatDate(payroll.effective_date)}
           </p>
@@ -77,23 +77,23 @@ export default function Payroll() {
               <span>Basic + allowances</span>
               <span>{formatCurrency(gross)}</span>
             </div>
-            <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
+            <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-900/[0.06]">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-violet-500 to-cyan-400"
+                className="h-full rounded-full bg-gradient-to-r from-blue-600 to-sky-400"
                 style={{ width: `${100 - allowancePct}%` }}
               />
             </div>
             <div className="mt-2 flex justify-between text-xs">
               <span className="text-muted">Basic {formatCurrency(basic)}</span>
-              <span className="text-cyan-300">Allowances {formatCurrency(allowances)}</span>
+              <span className="text-sky-600">Allowances {formatCurrency(allowances)}</span>
             </div>
           </div>
         </Card>
 
         <div className="flex flex-col gap-4">
-          <Card delay={0.05}>
+          <Card className="p-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-600">
                 <TrendingUp className="h-5 w-5" />
               </div>
               <div>
@@ -102,9 +102,9 @@ export default function Payroll() {
               </div>
             </div>
           </Card>
-          <Card delay={0.1}>
+          <Card className="p-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-rose-500/15 text-rose-400">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-rose-500/15 text-rose-600">
                 <TrendingDown className="h-5 w-5" />
               </div>
               <div>

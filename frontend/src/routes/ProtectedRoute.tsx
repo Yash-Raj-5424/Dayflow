@@ -1,6 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
-import { FlowBackground } from "../components/ui/FlowBackground";
 import { LogoMark } from "../components/ui/Logo";
 
 export function ProtectedRoute() {
@@ -8,10 +7,9 @@ export function ProtectedRoute() {
 
   if (isLoading) {
     return (
-      <div className="relative flex min-h-screen items-center justify-center">
-        <FlowBackground variant="subtle" />
+      <div className="flex min-h-screen items-center justify-center bg-bg">
         <div className="animate-pulse">
-          <LogoMark size={44} />
+          <LogoMark size={32} />
         </div>
       </div>
     );

@@ -70,9 +70,9 @@ export default function Leave() {
       <h1 className="mb-6 font-display text-3xl font-semibold text-ink">Leave</h1>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-1">
+        <Card className="p-5 lg:col-span-1">
           <h3 className="mb-4 flex items-center gap-2 font-display text-lg font-semibold text-ink">
-            <Plane className="h-4 w-4 text-violet-300" /> Apply for leave
+            <Plane className="h-4 w-4 text-blue-600" /> Apply for leave
           </h3>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <Select label="Type" value={leaveType} onChange={(e) => setLeaveType(e.target.value as LeaveType)}>
@@ -103,7 +103,7 @@ export default function Leave() {
           </form>
         </Card>
 
-        <Card delay={0.05} className="!p-0 overflow-hidden lg:col-span-2">
+        <Card className="overflow-hidden lg:col-span-2">
           {leaves.length === 0 ? (
             <EmptyState icon={<Plane className="h-5 w-5" />} title="No leave requests yet" />
           ) : (
@@ -119,7 +119,7 @@ export default function Leave() {
                   </p>
                   {l.remarks && <p className="text-xs text-faint">"{l.remarks}"</p>}
                   {l.admin_comment && (
-                    <p className="flex items-start gap-1.5 text-xs text-violet-300">
+                    <p className="flex items-start gap-1.5 text-xs text-blue-600">
                       <MessageSquare className="h-3.5 w-3.5 shrink-0 translate-y-0.5" /> {l.admin_comment}
                     </p>
                   )}

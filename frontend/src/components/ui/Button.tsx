@@ -12,18 +12,16 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary:
-    "text-white bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-400 bg-[length:180%_100%] bg-left hover:bg-right shadow-[0_0_24px_-6px_rgba(139,92,246,0.6)] transition-[background-position,box-shadow] duration-500",
-  secondary:
-    "text-ink glass hover:border-border-strong hover:bg-white/[0.06]",
-  ghost: "text-muted hover:text-ink hover:bg-white/[0.05]",
-  danger: "text-white bg-rose-500/90 hover:bg-rose-500 shadow-[0_0_20px_-8px_rgba(251,113,133,0.8)]",
+  primary: "text-white bg-accent hover:bg-accent-hover shadow-xs",
+  secondary: "text-ink bg-surface border border-border hover:bg-slate-50",
+  ghost: "text-muted hover:text-ink hover:bg-slate-100",
+  danger: "text-white bg-danger hover:bg-red-700 shadow-xs",
 };
 
 const sizeClasses: Record<Size, string> = {
-  sm: "text-xs px-3 py-1.5 gap-1.5",
-  md: "text-sm px-4 py-2.5 gap-2",
-  lg: "text-base px-6 py-3.5 gap-2.5",
+  sm: "text-[13px] h-8 px-3 gap-1.5",
+  md: "text-sm h-9 px-3.5 gap-2",
+  lg: "text-sm h-10 px-4 gap-2",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -32,10 +30,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         disabled={disabled || isLoading}
-        className={`inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.98] ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+        className={`inline-flex items-center justify-center rounded-md font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
         {...props}
       >
-        {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+        {isLoading && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
         {children}
       </button>
     );
