@@ -18,6 +18,7 @@ from app.schemas.user import (
     UserOut,
     UserRegister,
 )
+from app.services.email import send_verification_email
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -40,9 +41,8 @@ def register(payload: UserRegister, db: Session = Depends(get_db)) -> User:
     db.commit()
     db.refresh(user)
 
-    # In production this token would be emailed to the user rather than returned.
     verification_token = create_email_verification_token(str(user.id))
-    print(f"[email-verification] token for {user.email}: {verification_token}")
+    send_verification_email(user.email, verification_token)
 
     return user
 

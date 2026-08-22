@@ -52,6 +52,20 @@ Then edit `backend/.env`:
 
 `.env` is gitignored — every machine/environment needs its own copy. It is never committed.
 
+### Sending real verification emails (Gmail SMTP)
+
+By default `SMTP_USERNAME`/`SMTP_PASSWORD` are blank and verification emails are just logged to the console. To send real emails via Gmail:
+
+1. Enable 2-Step Verification on the Gmail account: https://myaccount.google.com/security
+2. Generate an App Password: https://myaccount.google.com/apppasswords (16 characters, no spaces — this is *not* your normal Gmail password)
+3. Fill in `backend/.env`:
+   ```
+   SMTP_USERNAME=youraddress@gmail.com
+   SMTP_PASSWORD=<the 16-character app password>
+   SMTP_FROM_EMAIL=youraddress@gmail.com
+   ```
+4. Restart the server. Registering will now send a real email with a verification link (`FRONTEND_URL/verify-email?token=...`) instead of printing the token to the console.
+
 ## 5. Run database migrations
 
 ```bash
