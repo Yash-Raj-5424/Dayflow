@@ -49,7 +49,7 @@ export default function TeamAttendance() {
   return (
     <div>
       <h1 className="mb-6 font-display text-3xl font-semibold text-ink">Team attendance</h1>
-      <Card className="!p-0 overflow-hidden">
+      <Card className="overflow-hidden">
         {records.length === 0 ? (
           <EmptyState icon={<CalendarClock className="h-5 w-5" />} title="No attendance recorded yet" />
         ) : (
@@ -66,7 +66,7 @@ export default function TeamAttendance() {
               </thead>
               <tbody>
                 {records.map((r) => (
-                  <tr key={r.id} className="border-b border-border/60 last:border-0 hover:bg-white/[0.02]">
+                  <tr key={r.id} className="border-b border-border/60 last:border-0 hover:bg-slate-900/[0.02]">
                     <td className="px-5 py-3.5 text-ink">{nameByUserId.get(r.employee_id) ?? r.employee_id.slice(0, 8)}</td>
                     <td className="px-5 py-3.5 text-muted">{formatDate(r.date)}</td>
                     <td className="px-5 py-3.5 text-muted">{formatTime(r.check_in)}</td>

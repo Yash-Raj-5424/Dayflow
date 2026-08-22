@@ -102,7 +102,7 @@ export default function TeamPayroll() {
         <span className="text-sm text-faint">{formatCurrency(totalMonthly)} / month total</span>
       </div>
 
-      <Card className="!p-0 overflow-hidden">
+      <Card className="overflow-hidden">
         {rows.length === 0 ? (
           <EmptyState icon={<Wallet className="h-5 w-5" />} title="No employees yet" />
         ) : (

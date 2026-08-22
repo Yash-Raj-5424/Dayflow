@@ -39,7 +39,7 @@ export default function VerifyEmail() {
       >
         {state === "verifying" && (
           <>
-            <Loader2 className="h-10 w-10 animate-spin text-violet-300" />
+            <Loader2 className="h-10 w-10 animate-spin text-blue-600" />
             <p className="mt-4 text-sm text-muted">Verifying your email…</p>
           </>
         )}
@@ -62,7 +62,7 @@ export default function VerifyEmail() {
         {state === "error" && (
           <>
             <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-rose-500/15">
-              <XCircle className="h-8 w-8 text-rose-400" />
+              <XCircle className="h-8 w-8 text-rose-600" />
             </div>
             <p className="text-sm text-ink">Verification failed</p>
             <p className="mt-1 text-xs text-faint">{errorMessage}</p>

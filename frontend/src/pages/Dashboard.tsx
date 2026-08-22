@@ -5,7 +5,6 @@ import { useAuth } from "../context/useAuth";
 import { useToast } from "../context/useToast";
 import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
-import { FlowRing } from "../components/ui/FlowRing";
 import { StatusBadge } from "../components/ui/Badge";
 import { PageSkeleton } from "../components/ui/Skeleton";
 import { apiErrorMessage } from "../lib/apiClient";
@@ -105,17 +104,17 @@ export default function Dashboard() {
     <div>
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <h1 className="font-display text-3xl font-semibold text-ink">
-          Hey {displayName} <span className="inline-block animate-[float_3s_ease-in-out_infinite]">👋</span>
+          Hey {displayName} 👋
         </h1>
         {isAdmin && (
-          <span className="flex items-center gap-1.5 rounded-full border border-violet-400/25 bg-violet-500/10 px-3 py-1 text-xs font-medium text-violet-300">
+          <span className="flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
             <Sparkles className="h-3.5 w-3.5" /> Admin view
           </span>
         )}
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-2 flex flex-col justify-between overflow-hidden sm:flex-row sm:items-center">
+        <Card className="p-5 lg:col-span-2 flex flex-col justify-between overflow-hidden sm:flex-row sm:items-center">
           <div>
             <p className="text-sm text-faint">Today's status</p>
             <h2 className="mt-1 font-display text-2xl font-semibold text-ink">
@@ -147,28 +146,28 @@ export default function Dashboard() {
               </Button>
             </div>
           </div>
-          <FlowRing
-            progress={presentDays / 5}
-            value={`${presentDays}/5`}
-            label="days this week"
-            size={128}
-            gradientId="ring-week"
-          />
+          <div className="shrink-0 text-right">
+            <p className="font-display text-3xl font-semibold text-ink">{presentDays}/5</p>
+            <p className="text-xs text-faint">days this week</p>
+            <div className="mt-2 h-1.5 w-28 overflow-hidden rounded-full bg-slate-100">
+              <div className="h-full rounded-full bg-accent" style={{ width: `${(presentDays / 5) * 100}%` }} />
+            </div>
+          </div>
         </Card>
 
-        <Card delay={0.05}>
+        <Card className="p-5">
           <div className="mb-3 flex items-center justify-between">
             <p className="text-sm text-faint">Leave</p>
             <Plane className="h-4 w-4 text-faint" />
           </div>
           <p className="font-display text-2xl font-semibold text-ink">{pendingLeaves} pending</p>
           <p className="mt-1 text-xs text-faint">{leaves.length} total requests</p>
-          <Link to="/leave" className="mt-4 flex items-center gap-1 text-xs font-medium text-violet-300 hover:text-violet-200">
+          <Link to="/leave" className="mt-4 flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700">
             Apply for leave <ArrowUpRight className="h-3 w-3" />
           </Link>
         </Card>
 
-        <Card delay={0.1}>
+        <Card className="p-5">
           <div className="mb-3 flex items-center justify-between">
             <p className="text-sm text-faint">Net salary</p>
             <Wallet className="h-4 w-4 text-faint" />
@@ -181,12 +180,12 @@ export default function Dashboard() {
           ) : (
             <p className="text-sm text-faint">Not configured yet</p>
           )}
-          <Link to="/payroll" className="mt-4 flex items-center gap-1 text-xs font-medium text-violet-300 hover:text-violet-200">
+          <Link to="/payroll" className="mt-4 flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700">
             View breakdown <ArrowUpRight className="h-3 w-3" />
           </Link>
         </Card>
 
-        <Card delay={0.15}>
+        <Card className="p-5">
           <p className="mb-3 text-sm text-faint">Recent leave requests</p>
           {leaves.length === 0 ? (
             <p className="text-sm text-faint">No requests yet.</p>
@@ -204,7 +203,7 @@ export default function Dashboard() {
 
         {isAdmin && (
           <>
-            <Card delay={0.2}>
+            <Card className="p-5">
               <div className="mb-3 flex items-center justify-between">
                 <p className="text-sm text-faint">Headcount</p>
                 <Users className="h-4 w-4 text-faint" />
@@ -212,12 +211,12 @@ export default function Dashboard() {
               <p className="font-display text-2xl font-semibold text-ink">{headcount ?? "—"}</p>
               <Link
                 to="/team/employees"
-                className="mt-4 flex items-center gap-1 text-xs font-medium text-violet-300 hover:text-violet-200"
+                className="mt-4 flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700"
               >
                 Manage team <ArrowUpRight className="h-3 w-3" />
               </Link>
             </Card>
-            <Card delay={0.25}>
+            <Card className="p-5">
               <div className="mb-3 flex items-center justify-between">
                 <p className="text-sm text-faint">Awaiting your review</p>
                 <ClipboardCheck className="h-4 w-4 text-faint" />
@@ -225,7 +224,7 @@ export default function Dashboard() {
               <p className="font-display text-2xl font-semibold text-ink">{pendingApprovals ?? "—"}</p>
               <Link
                 to="/team/leaves"
-                className="mt-4 flex items-center gap-1 text-xs font-medium text-violet-300 hover:text-violet-200"
+                className="mt-4 flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700"
               >
                 Review approvals <ArrowUpRight className="h-3 w-3" />
               </Link>

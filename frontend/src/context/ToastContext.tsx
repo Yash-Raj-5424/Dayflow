@@ -12,9 +12,9 @@ interface Toast {
 }
 
 const icons: Record<ToastKind, ReactNode> = {
-  success: <CheckCircle2 className="h-5 w-5 text-emerald-400" />,
-  error: <XCircle className="h-5 w-5 text-rose-400" />,
-  info: <Info className="h-5 w-5 text-cyan-400" />,
+  success: <CheckCircle2 className="h-5 w-5 text-emerald-600" />,
+  error: <XCircle className="h-5 w-5 text-rose-600" />,
+  info: <Info className="h-5 w-5 text-cyan-600" />,
 };
 
 let idCounter = 0;
@@ -57,7 +57,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, x: 60, scale: 0.95 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-strong pointer-events-auto flex w-80 items-start gap-3 rounded-xl p-3.5 shadow-2xl"
+              className="pointer-events-auto flex w-80 items-start gap-3 rounded-lg border border-border bg-surface p-3.5 shadow-md"
             >
               {icons[toast.kind]}
               <p className="flex-1 text-sm text-ink">{toast.message}</p>

@@ -75,13 +75,13 @@ export default function TeamLeaves() {
     <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <h1 className="font-display text-3xl font-semibold text-ink">Leave approvals</h1>
-        <div className="flex gap-1.5 rounded-xl border border-border bg-white/[0.02] p-1">
+        <div className="flex gap-1.5 rounded-xl border border-border bg-slate-900/[0.02] p-1">
           {(["pending", "all"] as const).map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
               className={`rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
-                filter === f ? "bg-white/[0.08] text-ink" : "text-faint hover:text-muted"
+                filter === f ? "bg-slate-900/[0.08] text-ink" : "text-faint hover:text-muted"
               }`}
             >
               {f}
@@ -90,7 +90,7 @@ export default function TeamLeaves() {
         </div>
       </div>
 
-      <Card className="!p-0 overflow-hidden">
+      <Card className="overflow-hidden">
         {visible.length === 0 ? (
           <EmptyState icon={<ClipboardCheck className="h-5 w-5" />} title="Nothing here" description="No leave requests match this filter." />
         ) : (
